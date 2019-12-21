@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -39,6 +40,9 @@ module.exports = {
           sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
         }
       ]
+    }),
+    new GenerateSW({
+      include: [/\.html$/, /\.js$/, /\.png$/]
     }),
     new CleanWebpackPlugin()
   ]
